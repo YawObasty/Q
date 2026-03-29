@@ -153,19 +153,20 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 function handleSplashScreen() {
     const splash = document.getElementById('splashScreen');
-    const myPhoto = splash.querySelector('img').parentElement; // Selects the photo div
     
-    document.body.classList.add('splash-active');
-
-    // After 1 second, start the 'vibration'
+    // 1. Start the timer as soon as the window loads
     setTimeout(() => {
-        myPhoto.classList.add('vibrate-active');
-    }, 1000);
-
-    // After 2.5 seconds, hide everything
-    setTimeout(() => {
-        myPhoto.classList.remove('vibrate-active');
+        // 2. Add the hide class
         splash.classList.add('splash-hide');
-        document.body.classList.remove('splash-active');
-    }, 2500);
+        
+        // 3. After the fade animation finishes (0.8s), delete it from the DOM
+        setTimeout(() => {
+            splash.style.display = 'none';
+            document.body.classList.remove('splash-active');
+        }, 800); 
+        
+        console.log("Splash Screen cleared. Welcome to QuickTrade!");
+    }, 2500); // 2.5 seconds of showtime
 }
+
+window.addEventListener('load', handleSplashScreen);
