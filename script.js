@@ -170,3 +170,28 @@ function handleSplashScreen() {
 }
 
 window.addEventListener('load', handleSplashScreen);
+function exitSplash() {
+    const splash = document.getElementById('splashScreen');
+    const enterSfx = document.getElementById('enterSfx');
+
+    // Play sound if you have it
+    if(enterSfx) {
+        enterSfx.currentTime = 0;
+        enterSfx.play().catch(() => {});
+    }
+
+    // Start the exit animation
+    splash.classList.add('splash-hide');
+    
+    // Completely remove after animation
+    setTimeout(() => {
+        splash.style.display = 'none';
+        document.body.classList.remove('splash-active');
+    }, 800);
+}
+
+// Attach to both buttons
+document.getElementById('skipBtn').addEventListener('click', exitSplash);
+document.getElementById('btnEnter').addEventListener('click', exitSplash);
+
+// Keep your existing handleSplashScreen to show the Enter button after 1.5s
