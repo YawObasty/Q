@@ -151,33 +151,21 @@ window.addEventListener('DOMContentLoaded', () => {
         realContent.classList.add('animate-in', 'fade-in', 'duration-500');
     }, 2000);
 });
+// Function to handle the Splash Screen
 function handleSplashScreen() {
     const splash = document.getElementById('splashScreen');
-    const enterAction = document.getElementById('enterAction');
-    const btnEnter = document.getElementById('btnEnter');
     
+    // 1. Disable page scrolling while the splash is active
     document.body.classList.add('splash-active');
-
-    // 1. Show the button after the name finishes typing (around 1.5s)
+    
+    // 2. Wait 2.5 seconds (2500ms), then start the fade-out
     setTimeout(() => {
-        enterAction.classList.remove('opacity-0', 'translate-y-4');
-        enterAction.classList.add('opacity-100', 'translate-y-0');
-    }, 1500);
-
-    // 2. The "Manual Entry" Click
-    btnEnter.addEventListener('click', () => {
-        // Play a quick vibrate/shake on the button for feedback
-        btnEnter.classList.add('vibrate-active');
+        splash.classList.add('splash-hide');
         
-        setTimeout(() => {
-            // Fade out the splash screen
-            splash.classList.add('splash-hide');
-            
-            // Cleanup: remove from screen after 0.8s animation
-            setTimeout(() => {
-                splash.style.display = 'none';
-                document.body.classList.remove('splash-active');
-            }, 800);
-        }, 200);
-    });
+        // 3. Allow page scrolling again
+        document.body.classList.remove('splash-active');
+    }, 2500);
 }
+
+// Run the function when the entire page is loaded
+window.addEventListener('load', handleSplashScreen);
