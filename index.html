@@ -11,7 +11,18 @@
         /* Hide scrollbars for the category slider */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        
+        <section class="px-4 py-4 bg-gray-50 dark:bg-gray-800/30 mx-4 rounded-2xl mb-4">
+    <div class="flex justify-between items-center mb-2">
+        <h4 class="text-sm font-bold dark:text-gray-300">Budget (GH₵)</h4>
+        <span id="priceValue" class="text-sm font-black text-blue-600 bg-blue-100 dark:bg-blue-900/50 px-3 py-1 rounded-lg">500</span>
+    </div>
+    <input type="range" id="priceRange" min="10" max="1000" value="500" 
+        class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-600">
+    <div class="flex justify-between text-[10px] text-gray-400 mt-1 uppercase font-bold tracking-wider">
+        <span>Min: 10</span>
+        <span>Max: 1000</span>
+    </div>
+</section>
         /* Smooth transitions for Dark Mode */
         * { transition: background-color 0.3s, border-color 0.3s, color 0.3s; }
     </style>
