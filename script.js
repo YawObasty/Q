@@ -81,3 +81,25 @@ contactButtons.forEach(btn => {
         btn.href = `https://wa.me/${myNumber}?text=${message}`;
     });
 });
+const wishlistBtns = document.querySelectorAll('.wishlist-btn');
+
+wishlistBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        // Prevent the click from opening the product (if you add that later)
+        e.stopPropagation();
+
+        const icon = btn.querySelector('i');
+        
+        // Toggle Classes
+        icon.classList.toggle('fas'); // Solid heart
+        icon.classList.toggle('far'); // Outline heart
+        icon.classList.toggle('text-red-500'); // Red color
+        
+        // Add a "Pulse" animation when clicked
+        if (icon.classList.contains('fas')) {
+            btn.classList.add('scale-125');
+            setTimeout(() => btn.classList.remove('scale-125'), 200);
+            console.log("Item saved to favorites!");
+        }
+    });
+});
