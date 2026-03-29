@@ -169,3 +169,21 @@ function handleSplashScreen() {
 
 // Run the function when the entire page is loaded
 window.addEventListener('load', handleSplashScreen);
+function handleSplashScreen() {
+    const splash = document.getElementById('splashScreen');
+    const myPhoto = splash.querySelector('img').parentElement; // Selects the photo div
+    
+    document.body.classList.add('splash-active');
+
+    // After 1 second, start the 'vibration'
+    setTimeout(() => {
+        myPhoto.classList.add('vibrate-active');
+    }, 1000);
+
+    // After 2.5 seconds, hide everything
+    setTimeout(() => {
+        myPhoto.classList.remove('vibrate-active');
+        splash.classList.add('splash-hide');
+        document.body.classList.remove('splash-active');
+    }, 2500);
+}
