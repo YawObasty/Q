@@ -61,3 +61,8 @@ actionButtons.forEach(button => {
         alert("Item added to your selection!");
     });
 });
+const profileImg = document.querySelector('.group');
+profileImg.addEventListener('click', () => {
+    alert("Profile Settings Coming Soon!");
+    // Later, you can toggle a 'hidden' div here for a Logout menu
+});
