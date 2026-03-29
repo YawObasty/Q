@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickTrade | Obasty Market</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/dist/css/all.min.css">
+    
+    <style>
+        /* Hide scrollbars for the category slider */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Smooth transitions for Dark Mode */
+        * { transition: background-color 0.3s, border-color 0.3s, color 0.3s; }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-950 flex justify-center">
+
+    <div class="w-full max-w-[450px] bg-white dark:bg-gray-900 min-h-screen shadow-2xl relative flex flex-col">
+
+        <nav class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md px-4 py-3 flex justify-between items-center border-b dark:border-gray-800">
+            <h1 class="text-xl font-black text-blue-600 tracking-tighter">QUICKTRADE<span>.</span></h1>
+            <div class="flex items-center space-x-3">
+                <button id="darkToggle" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-yellow-400">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <i class="fas fa-bell text-gray-400 text-xl"></i>
+            </div>
+        </nav>
+
+        <header class="p-4">
+            <div class="relative">
+                <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                <input type="text" placeholder="Search for designs or laptops..." 
+                    class="w-full bg-gray-100 dark:bg-gray-800 border-none rounded-2xl py-4 pl-12 pr-4 text-sm focus:ring-2 focus:ring-blue-500 outline-none dark:text-white">
+            </div>
+        </header>
+
+        <section class="py-2">
+            <div class="flex space-x-3 overflow-x-auto px-4 no-scrollbar">
+                <button class="flex-shrink-0 bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-bold shadow-lg shadow-blue-500/30">All</button>
+                <button class="flex-shrink-0 bg-gray-100 dark:bg-gray-800 dark:text-gray-300 px-5 py-2 rounded-full text-sm font-medium">Graphics</button>
+                <button class="flex-shrink-0 bg-gray-100 dark:bg-gray-800 dark:text-gray-300 px-5 py-2 rounded-full text-sm font-medium">Laptops</button>
+                <button class="flex-shrink-0 bg-gray-100 dark:bg-gray-800 dark:text-gray-300 px-5 py-2 rounded-full text-sm font-medium">Repair</button>
+            </div>
+        </section>
+
+        <main class="flex-1 p-4 pb-24 space-y-6">
+            <h2 class="text-lg font-bold dark:text-white">Fresh for you</h2>
+            
+            <div class="bg-gray-50 dark:bg-gray-800/50 rounded-3xl overflow-hidden border dark:border-gray-800 transition-all hover:scale-[1.02]">
+                <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?w=500" class="h-48 w-full object-cover">
+                <div class="p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-bold text-gray-800 dark:text-white text-lg">Web Development Setup</h3>
+                        <span class="text-blue-600 font-extrabold">GH₵ 400</span>
+                    </div>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mb-4">Complete HTML/CSS/JS installation and local server setup.</p>
+                    <button class="w-full bg-gray-900 dark:bg-white dark:text-gray-900 text-white py-3 rounded-xl font-bold text-sm">View Details</button>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 dark:bg-gray-800/50 rounded-3xl overflow-hidden border dark:border-gray-800 transition-all hover:scale-[1.02]">
+                <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?w=500" class="h-48 w-full object-cover">
+                <div class="p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-bold text-gray-800 dark:text-white text-lg">Professional Logo</h3>
+                        <span class="text-blue-600 font-extrabold">GH₵ 120</span>
+                    </div>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mb-4">High-quality minimalist designs for your startup.</p>
+                    <button class="w-full bg-gray-900 dark:bg-white dark:text-gray-900 text-white py-3 rounded-xl font-bold text-sm">View Details</button>
+                </div>
+            </div>
+        </main>
+
+        <nav class="fixed bottom-0 w-full max-w-[450px] bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg border-t dark:border-gray-800 px-6 py-4 flex justify-between items-center shadow-inner">
+            <a href="#" class="text-blue-600"><i class="fas fa-home text-xl"></i></a>
+            <a href="#" class="text-gray-400"><i class="fas fa-search text-xl"></i></a>
+            <div class="w-14 h-14 bg-blue-600 rounded-full flex items-center justify-center text-white shadow-xl shadow-blue-500/40 -mt-12 border-4 border-white dark:border-gray-900">
+                <i class="fas fa-plus text-xl"></i>
+            </div>
+            <a href="#" class="text-gray-400"><i class="fas fa-comment-dots text-xl"></i></a>
+            <a href="#" class="text-gray-400"><i class="fas fa-user text-xl"></i></a>
+        </nav>
+
+    </div>
+
+    <script>
+        const darkToggle = document.getElementById('darkToggle');
+        const html = document.documentElement;
+
+        darkToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            const icon = darkToggle.querySelector('i');
+            
+            if (html.classList.contains('dark')) {
+                icon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                icon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Keep theme after refresh
+        if (localStorage.getItem('theme') === 'dark') {
+            html.classList.add('dark');
+            darkToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
+        }
+    </script>
+</body>
+</html>
