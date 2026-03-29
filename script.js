@@ -138,3 +138,29 @@ document.querySelectorAll('.action-btn').forEach(btn => {
         openSheet(title, desc);
     });
 });
+const searchInput = document.querySelector('header input');
+const searchHistory = document.getElementById('searchHistory');
+
+// Show history when clicking the search box
+searchInput.addEventListener('focus', () => {
+    searchHistory.classList.remove('hidden');
+    // Add a slight fade-in effect
+    searchHistory.classList.add('animate-in', 'fade-in', 'slide-in-from-top-2');
+});
+
+// Hide history when clicking outside
+document.addEventListener('click', (e) => {
+    if (!searchInput.contains(e.target) && !searchHistory.contains(e.target)) {
+        searchHistory.classList.add('hidden');
+    }
+});
+
+// Make history items clickable
+document.querySelectorAll('#historyList li').forEach(item => {
+    item.addEventListener('click', () => {
+        const searchTerm = item.querySelector('span').innerText;
+        searchInput.value = searchTerm;
+        searchHistory.classList.add('hidden');
+        // Trigger your search function here!
+    });
+});
