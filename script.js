@@ -152,20 +152,35 @@ window.addEventListener('DOMContentLoaded', () => {
     }, 2000);
 });
 function handleSplashScreen() {
-    // ... your existing typewriter code ...
-
-    // FIND THE BUTTONS
-    const skipBtn = document.getElementById('skipBtn');
+    const splash = document.getElementById('splashScreen');
+    const enterAction = document.getElementById('enterAction');
     const btnEnter = document.getElementById('btnEnter');
+    
+    document.body.classList.add('splash-active');
 
-    // ATTACH THE CLICK
-    if(skipBtn) {
-        skipBtn.addEventListener('click', (e) => {
-            e.preventDefault(); // Prevents any weird browser jumps
-            console.log("Skip Clicked!"); // Check your browser console (F12) to see if this shows up
-            exitSplash();
-        });
-    }
+    // 1. Show the button after the name finishes typing (around 1.5s)
+    setTimeout(() => {
+        enterAction.classList.remove('opacity-0', 'translate-y-4');
+        enterAction.classList.add('opacity-100', 'translate-y-0');
+    }, 1500);
+
+    // 2. The "Manual Entry" Click
+    btnEnter.addEventListener('click', () => {
+        // Play a quick vibrate/shake on the button for feedback
+        btnEnter.classList.add('vibrate-active');
+        
+        setTimeout(() => {
+            // Fade out the splash screen
+            splash.classList.add('splash-hide');
+            
+            // Cleanup: remove from screen after 0.8s animation
+            setTimeout(() => {
+                splash.style.display = 'none';
+                document.body.classList.remove('splash-active');
+            }, 800);
+        }, 200);
+    });
+}
 
     if(btnEnter) {
         btnEnter.addEventListener('click', exitSplash);
