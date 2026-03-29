@@ -228,5 +228,31 @@
             darkToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
         }
     </script>
+    <div id="sheetOverlay" class="fixed inset-0 bg-black/50 z-[100] hidden opacity-0 transition-opacity duration-300"></div>
+
+<div id="bottomSheet" class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[450px] bg-white dark:bg-gray-900 rounded-t-[32px] z-[101] transform translate-y-full transition-transform duration-500 ease-out border-t dark:border-gray-800">
+    
+    <div class="flex justify-center p-4">
+        <div class="w-12 h-1.5 bg-gray-300 dark:bg-gray-700 rounded-full"></div>
+    </div>
+
+    <div class="px-6 pb-10 max-h-[70vh] overflow-y-auto">
+        <div class="flex justify-between items-start mb-4">
+            <h2 id="sheetTitle" class="text-2xl font-black dark:text-white">Product Details</h2>
+            <button id="closeSheet" class="text-gray-400 text-xl"><i class="fas fa-times-circle"></i></button>
+        </div>
+        
+        <p id="sheetDescription" class="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
+            Detailed information about the service will appear here. This area is perfect for listing specifications, delivery times, and terms.
+        </p>
+
+        <div class="flex space-x-3">
+            <button class="flex-1 bg-blue-600 text-white py-4 rounded-2xl font-bold shadow-lg shadow-blue-500/30">Buy Now</button>
+            <button class="w-14 h-14 bg-gray-100 dark:bg-gray-800 dark:text-white rounded-2xl flex items-center justify-center">
+                <i class="far fa-comment-dots text-xl"></i>
+            </button>
+        </div>
+    </div>
+</div>
 </body>
 </html>
