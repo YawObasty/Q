@@ -187,3 +187,29 @@ function handleSplashScreen() {
         document.body.classList.remove('splash-active');
     }, 2500);
 }
+function typeWriter(text, elementId, speed) {
+    let i = 0;
+    const element = document.getElementById(elementId);
+    element.innerHTML = ""; // Clear any existing text
+
+    function type() {
+        if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+        } else {
+            // Stop the blinking cursor once typing is done
+            document.getElementById('cursor').style.display = 'none';
+        }
+    }
+    type();
+}
+
+// Update your handleSplashScreen to include this:
+window.addEventListener('load', () => {
+    // Start typing "Obasty." immediately
+    typeWriter("Obasty.", "typewriterName", 150); 
+    
+    // Call your existing splash screen timer logic here
+    handleSplashScreen();
+});
