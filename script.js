@@ -21,3 +21,21 @@ priceRange.addEventListener('input', (e) => {
         }
     });
 });
+const catButtons = document.querySelectorAll('.category-btn');
+
+catButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        // 1. Remove active styles from ALL buttons
+        catButtons.forEach(b => {
+            b.classList.remove('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-500/30');
+            b.classList.add('bg-gray-100', 'dark:bg-gray-800', 'dark:text-gray-300');
+        });
+
+        // 2. Add active styles to the CLICKED button
+        btn.classList.add('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-500/30');
+        btn.classList.remove('bg-gray-100', 'dark:bg-gray-800', 'dark:text-gray-300');
+        
+        // 3. Optional: Filter products by category here
+        filterByCategory(btn.innerText);
+    });
+});
