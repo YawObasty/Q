@@ -32,3 +32,11 @@ body.splash-active {
     animation: photo-vibrate 0.1s linear infinite;
     filter: brightness(1.1); /* Makes the photo "glow" while vibrating */
 }
+/* The 'Disappear' Magic */
+.splash-hide {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important; /* This lets you click the buttons behind it */
+    transition: all 0.8s ease-in-out;
+    transform: scale(1.2); /* Slight zoom out as it fades */
+}
