@@ -151,3 +151,21 @@ window.addEventListener('DOMContentLoaded', () => {
         realContent.classList.add('animate-in', 'fade-in', 'duration-500');
     }, 2000);
 });
+// Function to handle the Splash Screen
+function handleSplashScreen() {
+    const splash = document.getElementById('splashScreen');
+    
+    // 1. Disable page scrolling while the splash is active
+    document.body.classList.add('splash-active');
+    
+    // 2. Wait 2.5 seconds (2500ms), then start the fade-out
+    setTimeout(() => {
+        splash.classList.add('splash-hide');
+        
+        // 3. Allow page scrolling again
+        document.body.classList.remove('splash-active');
+    }, 2500);
+}
+
+// Run the function when the entire page is loaded
+window.addEventListener('load', handleSplashScreen);
