@@ -47,15 +47,17 @@
             </span>
         </div>
 
-        <h1 class="text-5xl font-black text-white tracking-tighter mb-2 shadow-text">Obasty<span>.</span></h1>
-        <p class="text-sm font-medium text-blue-100 uppercase tracking-widest mb-16 opacity-80">Marketplace</p>
-        
-        <div class="flex items-center space-x-3 text-white/70">
-            <i class="fas fa-spinner fa-spin text-xl"></i>
-            <span class="text-xs font-bold uppercase tracking-wider">Initializing...</span>
-        </div>
-    </div>
+       <h1 id="typewriterName" class="text-5xl font-black text-white tracking-tighter mb-2 shadow-text"></h1>
 
+<div id="enterAction" class="opacity-0 translate-y-4 transition-all duration-700 mt-10">
+    <button id="btnEnter" class="group relative px-8 py-4 bg-white text-blue-700 rounded-full font-black uppercase tracking-widest text-sm shadow-xl hover:shadow-blue-400/50 active:scale-95 transition-all">
+        <span class="relative z-10 flex items-center space-x-2">
+            <span>Enter Market</span>
+            <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+        </span>
+        <div class="absolute inset-0 rounded-full bg-blue-100 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+    </button>
+</div>
     <div class="absolute bottom-10 left-0 right-0 text-center text-white/40 text-xs font-mono">
         developed by Alexander Bempah (Obasty)
     </div>
