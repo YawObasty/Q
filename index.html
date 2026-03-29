@@ -33,12 +33,20 @@
 
         <nav class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md px-4 py-3 flex justify-between items-center border-b dark:border-gray-800">
             <h1 class="text-xl font-black text-blue-600 tracking-tighter">NanaObasty Marketplace<span>.</span></h1>
-            <div class="flex items-center space-x-3">
-                <button id="darkToggle" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-yellow-400">
-                    <i class="fas fa-moon"></i>
-                </button>
-                <i class="fas fa-bell text-gray-400 text-xl"></i>
-            </div>
+           <div class="flex items-center space-x-5">
+    <div class="relative cursor-pointer">
+        <i class="fas fa-bell text-gray-400 text-xl"></i>
+        <span class="absolute -top-1 -right-1 flex h-4 w-4">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-4 w-4 bg-red-600 text-[10px] text-white items-center justify-center font-bold">2</span>
+        </span>
+    </div>
+
+    <div class="relative cursor-pointer">
+        <i class="fas fa-shopping-cart text-gray-400 text-xl"></i>
+        <span id="cartBadge" class="hidden absolute -top-1 -right-1 h-4 w-4 bg-blue-600 rounded-full text-[10px] text-white flex items-center justify-center font-bold">0</span>
+    </div>
+</div>
         </nav>
 
         <header class="p-4">
