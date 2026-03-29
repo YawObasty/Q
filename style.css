@@ -44,3 +44,14 @@ body.splash-active {
     pointer-events: none !important; 
     transition: all 0.8s ease-in-out;
 }
+#btnEnter {
+    position: relative;
+    z-index: 9999 !important; /* Forces it to the absolute front */
+    cursor: pointer !important;
+}
+
+.splash-hide {
+    opacity: 0 !important;
+    pointer-events: none !important; /* Crucial: makes the screen 'clickable-through' */
+    transition: all 0.8s ease-in-out;
+}
