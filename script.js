@@ -66,3 +66,18 @@ profileImg.addEventListener('click', () => {
     alert("Profile Settings Coming Soon!");
     // Later, you can toggle a 'hidden' div here for a Logout menu
 });
+const contactButtons = document.querySelectorAll('.whatsapp-btn');
+
+contactButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        // Find the title of the card this button is inside
+        const productTitle = btn.closest('.bg-gray-50').querySelector('h3').innerText;
+        const myNumber = "233XXXXXXXXX";
+        
+        // Encode the text so the spaces don't break the link
+        const message = encodeURIComponent(`Hello! I'm interested in: ${productTitle}. Is it still available?`);
+        
+        // Change the link dynamically
+        btn.href = `https://wa.me/${myNumber}?text=${message}`;
+    });
+});
