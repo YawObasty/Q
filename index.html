@@ -104,8 +104,29 @@
             <h2 class="text-lg font-bold dark:text-white">Fresh for you</h2>
             
             <div class="bg-gray-50 dark:bg-gray-800/50 rounded-3xl overflow-hidden border dark:border-gray-800 transition-all hover:scale-[1.02]">
-                <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?w=500" class="h-48 w-full object-cover">
-                <div class="p-4">
+<div class="relative group">
+    <div class="flex overflow-x-auto snap-x snap-mandatory no-scrollbar h-60 w-full bg-gray-200 dark:bg-gray-800">
+        
+        <div class="flex-shrink-0 w-full snap-center">
+            <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?w=500" class="w-full h-full object-cover">
+        </div>
+
+        <div class="flex-shrink-0 w-full snap-center">
+            <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500" class="w-full h-full object-cover">
+        </div>
+
+        <div class="flex-shrink-0 w-full snap-center">
+            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500" class="w-full h-full object-cover">
+        </div>
+
+    </div>
+
+    <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex space-x-1.5 px-2 py-1 bg-black/20 backdrop-blur-md rounded-full">
+        <div class="w-1.5 h-1.5 rounded-full bg-white"></div>
+        <div class="w-1.5 h-1.5 rounded-full bg-white/40"></div>
+        <div class="w-1.5 h-1.5 rounded-full bg-white/40"></div>
+    </div>
+</div>                <div class="p-4">
                     <div class="flex justify-between items-start mb-2">
                         <h3 class="font-bold text-gray-800 dark:text-white text-lg">Web Development Setup</h3>
                         <span class="text-blue-600 font-extrabold">GH₵ 400</span>
