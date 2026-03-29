@@ -152,21 +152,24 @@ window.addEventListener('DOMContentLoaded', () => {
     }, 2000);
 });
 function handleSplashScreen() {
-    const splash = document.getElementById('splashScreen');
-    
-    // 1. Start the timer as soon as the window loads
-    setTimeout(() => {
-        // 2. Add the hide class
-        splash.classList.add('splash-hide');
-        
-        // 3. After the fade animation finishes (0.8s), delete it from the DOM
-        setTimeout(() => {
-            splash.style.display = 'none';
-            document.body.classList.remove('splash-active');
-        }, 800); 
-        
-        console.log("Splash Screen cleared. Welcome to QuickTrade!");
-    }, 2500); // 2.5 seconds of showtime
+    // ... your existing typewriter code ...
+
+    // FIND THE BUTTONS
+    const skipBtn = document.getElementById('skipBtn');
+    const btnEnter = document.getElementById('btnEnter');
+
+    // ATTACH THE CLICK
+    if(skipBtn) {
+        skipBtn.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevents any weird browser jumps
+            console.log("Skip Clicked!"); // Check your browser console (F12) to see if this shows up
+            exitSplash();
+        });
+    }
+
+    if(btnEnter) {
+        btnEnter.addEventListener('click', exitSplash);
+    }
 }
 
 window.addEventListener('load', handleSplashScreen);
