@@ -151,21 +151,21 @@ window.addEventListener('DOMContentLoaded', () => {
         realContent.classList.add('animate-in', 'fade-in', 'duration-500');
     }, 2000);
 });
-// Function to handle the Splash Screen
 function handleSplashScreen() {
     const splash = document.getElementById('splashScreen');
+    const myPhoto = splash.querySelector('img').parentElement; // Selects the photo div
     
-    // 1. Disable page scrolling while the splash is active
     document.body.classList.add('splash-active');
-    
-    // 2. Wait 2.5 seconds (2500ms), then start the fade-out
+
+    // After 1 second, start the 'vibration'
     setTimeout(() => {
+        myPhoto.classList.add('vibrate-active');
+    }, 1000);
+
+    // After 2.5 seconds, hide everything
+    setTimeout(() => {
+        myPhoto.classList.remove('vibrate-active');
         splash.classList.add('splash-hide');
-        
-        // 3. Allow page scrolling again
         document.body.classList.remove('splash-active');
     }, 2500);
 }
-
-// Run the function when the entire page is loaded
-window.addEventListener('load', handleSplashScreen);
