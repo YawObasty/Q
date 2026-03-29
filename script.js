@@ -151,65 +151,33 @@ window.addEventListener('DOMContentLoaded', () => {
         realContent.classList.add('animate-in', 'fade-in', 'duration-500');
     }, 2000);
 });
-// Function to handle the Splash Screen
 function handleSplashScreen() {
     const splash = document.getElementById('splashScreen');
+    const enterAction = document.getElementById('enterAction');
+    const btnEnter = document.getElementById('btnEnter');
     
-    // 1. Disable page scrolling while the splash is active
     document.body.classList.add('splash-active');
-    
-    // 2. Wait 2.5 seconds (2500ms), then start the fade-out
+
+    // 1. Show the button after the name finishes typing (around 1.5s)
     setTimeout(() => {
-        splash.classList.add('splash-hide');
+        enterAction.classList.remove('opacity-0', 'translate-y-4');
+        enterAction.classList.add('opacity-100', 'translate-y-0');
+    }, 1500);
+
+    // 2. The "Manual Entry" Click
+    btnEnter.addEventListener('click', () => {
+        // Play a quick vibrate/shake on the button for feedback
+        btnEnter.classList.add('vibrate-active');
         
-        // 3. Allow page scrolling again
-        document.body.classList.remove('splash-active');
-    }, 2500);
+        setTimeout(() => {
+            // Fade out the splash screen
+            splash.classList.add('splash-hide');
+            
+            // Cleanup: remove from screen after 0.8s animation
+            setTimeout(() => {
+                splash.style.display = 'none';
+                document.body.classList.remove('splash-active');
+            }, 800);
+        }, 200);
+    });
 }
-
-// Run the function when the entire page is loaded
-window.addEventListener('load', handleSplashScreen);
-function handleSplashScreen() {
-    const splash = document.getElementById('splashScreen');
-    const myPhoto = splash.querySelector('img').parentElement; // Selects the photo div
-    
-    document.body.classList.add('splash-active');
-
-    // After 1 second, start the 'vibration'
-    setTimeout(() => {
-        myPhoto.classList.add('vibrate-active');
-    }, 1000);
-
-    // After 2.5 seconds, hide everything
-    setTimeout(() => {
-        myPhoto.classList.remove('vibrate-active');
-        splash.classList.add('splash-hide');
-        document.body.classList.remove('splash-active');
-    }, 2500);
-}
-function typeWriter(text, elementId, speed) {
-    let i = 0;
-    const element = document.getElementById(elementId);
-    element.innerHTML = ""; // Clear any existing text
-
-    function type() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        } else {
-            // Stop the blinking cursor once typing is done
-            document.getElementById('cursor').style.display = 'none';
-        }
-    }
-    type();
-}
-
-// Update your handleSplashScreen to include this:
-window.addEventListener('load', () => {
-    // Start typing "Obasty." immediately
-    typeWriter("Obasty.", "typewriterName", 150); 
-    
-    // Call your existing splash screen timer logic here
-    handleSplashScreen();
-});
