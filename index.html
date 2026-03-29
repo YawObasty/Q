@@ -1,272 +1,154 @@
 <!DOCTYPE html>
-<html lang="en" class="">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nana| Obasty Market</title>
+    <title>Nana | Obasty Market</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/dist/css/all.min.css">
     
     <style>
-        /* Hide scrollbars for the category slider */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        <section class="px-4 py-4 bg-gray-50 dark:bg-gray-800/30 mx-4 rounded-2xl mb-4">
-    <div class="flex justify-between items-center mb-2">
-        <h4 class="text-sm font-bold dark:text-gray-300">Budget (GH₵)</h4>
-        <span id="priceValue" class="text-sm font-black text-blue-600 bg-blue-100 dark:bg-blue-900/50 px-3 py-1 rounded-lg">500</span>
-    </div>
-    <input type="range" id="priceRange" min="10" max="1000" value="500" 
-        class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-600">
-    <div class="flex justify-between text-[10px] text-gray-400 mt-1 uppercase font-bold tracking-wider">
-        <span>Min: 10</span>
-        <span>Max: 1000</span>
-    </div>
-</section>
-        /* Smooth transitions for Dark Mode */
         * { transition: background-color 0.3s, border-color 0.3s, color 0.3s; }
+        
+        /* Animation for the bottom sheet */
+        .sheet-active { transform: translateY(0) !important; }
+        .overlay-active { display: block !important; opacity: 1 !important; }
     </style>
 </head>
 <body class="bg-gray-100 dark:bg-gray-950 flex justify-center"> 
     <div class="w-full max-w-[450px] bg-white dark:bg-gray-900 min-h-screen shadow-2xl relative flex flex-col">
 
         <nav class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md px-4 py-3 flex justify-between items-center border-b dark:border-gray-800">
-            <h1 class="text-xl font-black text-blue-600 tracking-tighter">NanaObasty Marketplace<span>.</span></h1>
-           <div class="flex items-center space-x-5">
-    <div class="relative cursor-pointer">
-        <i class="fas fa-bell text-gray-400 text-xl"></i>
-        <span class="absolute -top-1 -right-1 flex h-4 w-4">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-4 w-4 bg-red-600 text-[10px] text-white items-center justify-center font-bold">2</span>
-        </span>
-    </div>
-
-    <div class="relative cursor-pointer">
-        <i class="fas fa-shopping-cart text-gray-400 text-xl"></i>
-        <span id="cartBadge" class="hidden absolute -top-1 -right-1 h-4 w-4 bg-blue-600 rounded-full text-[10px] text-white flex items-center justify-center font-bold">0</span>
-    </div>
-</div>
-            <div class="flex items-center ml-2 border-l dark:border-gray-800 pl-3">
-    <div class="relative group cursor-pointer">
-        <img src="https://ui-avatars.com/api/?name=Alexander+Bempah&background=0D8ABC&color=fff" 
-             alt="User Profile" 
-             class="w-9 h-9 rounded-full border-2 border-blue-600 p-0.5 object-cover">
-        
-        <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white dark:border-gray-900 rounded-full"></span>
-    </div>
-</div>
+            <h1 class="text-xl font-black text-blue-600 tracking-tighter">NanaObasty<span>.</span></h1>
+            <div class="flex items-center space-x-4">
+                <button id="darkToggle" class="text-gray-400 hover:text-blue-600 transition-colors">
+                    <i class="fas fa-moon text-xl"></i>
+                </button>
+                <div class="relative cursor-pointer">
+                    <i class="fas fa-bell text-gray-400 text-xl"></i>
+                    <span class="absolute -top-1 -right-1 flex h-4 w-4">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-4 w-4 bg-red-600 text-[10px] text-white items-center justify-center font-bold">2</span>
+                    </span>
+                </div>
+                <img src="https://ui-avatars.com/api/?name=Alexander+Bempah&background=0D8ABC&color=fff" class="w-9 h-9 rounded-full border-2 border-blue-600 p-0.5">
+            </div>
         </nav>
 
         <header class="p-4">
             <div class="relative">
                 <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                <input type="text" placeholder="Search for all kinds of products..." 
-              class="w-full bg-gray-100 dark:bg-gray-800 border-none rounded-2xl py-4 pl-12 pr-4 text-sm focus:ring-2 focus:ring-blue-500 outline-none dark:text-white">
+                <input type="text" placeholder="Search products..." class="w-full bg-gray-100 dark:bg-gray-800 rounded-2xl py-4 pl-12 pr-4 text-sm outline-none dark:text-white">
             </div>
         </header>
 
-      <section class="sticky top-[65px] z-40 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm py-4 border-b dark:border-gray-800">
-    <div class="flex space-x-4 overflow-x-auto px-4 no-scrollbar">
-        
-        <button class="category-btn active flex-shrink-0 flex flex-col items-center space-y-1">
-            <div class="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center shadow-lg shadow-blue-500/30">
-                <i class="fas fa-grid-2"></i>
+        <section class="px-4 py-4 bg-gray-50 dark:bg-gray-800/30 mx-4 rounded-2xl mb-4">
+            <div class="flex justify-between items-center mb-2">
+                <h4 class="text-sm font-bold dark:text-gray-300">Budget (GH₵)</h4>
+                <span id="priceValue" class="text-sm font-black text-blue-600 bg-blue-100 dark:bg-blue-900/50 px-3 py-1 rounded-lg">500</span>
             </div>
-            <span class="text-[10px] font-bold uppercase tracking-tight dark:text-gray-300">All</span>
-        </button>
+            <input type="range" id="priceRange" min="10" max="1000" value="500" class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-600">
+        </section>
 
-        <button class="category-btn flex-shrink-0 flex flex-col items-center space-y-1 text-gray-400">
-            <div class="w-12 h-12 rounded-2xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
-                <i class="fas fa-pen-nib"></i>
-            </div>
-            <span class="text-[10px] font-bold uppercase tracking-tight">Graphics</span>
-        </button>
-
-        <button class="category-btn flex-shrink-0 flex flex-col items-center space-y-1 text-gray-400">
-            <div class="w-12 h-12 rounded-2xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
-                <i class="fas fa-laptop"></i>
-            </div>
-            <span class="text-[10px] font-bold uppercase tracking-tight">Laptops</span>
-        </button>
-
-        <button class="category-btn flex-shrink-0 flex flex-col items-center space-y-1 text-gray-400">
-            <div class="w-12 h-12 rounded-2xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
-                <i class="fas fa-tools"></i>
-            </div>
-            <span class="text-[10px] font-bold uppercase tracking-tight">Repair</span>
-        </button>
-
-    </div>
+        <section class="sticky top-[65px] z-40 bg-white/95 dark:bg-gray-900/95 py-4 border-b dark:border-gray-800">
+            <div class="flex space-x-4 overflow-x-auto px-4 no-scrollbar">
+                <button class="flex-shrink-0 flex flex-col items-center space-y-1">
+                    <div class="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center shadow-lg"><i class="fas fa-th-large"></i></div>
+                    <span class="text-[10px] font-bold uppercase dark:text-gray-300">All</span>
+                </button>
+                <button class="flex-shrink-0 flex flex-col items-center space-y-1 text-gray-400">
+                    <div class="w-12 h-12 rounded-2xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center"><i class="fas fa-laptop"></i></div>
+                    <span class="text-[10px] font-bold uppercase">Laptops</span>
+                </button>
+                </div>
         </section>
 
         <main class="flex-1 p-4 pb-24 space-y-6">
             <div id="skeletonFeed" class="space-y-6">
-    <div class="bg-gray-100 dark:bg-gray-800 rounded-3xl overflow-hidden p-4 animate-pulse">
-        <div class="h-48 bg-gray-200 dark:bg-gray-700 rounded-2xl mb-4"></div>
-        <div class="h-6 bg-gray-200 dark:bg-gray-700 rounded-full w-3/4 mb-2"></div>
-        <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded-full w-1/2"></div>
-    </div>
-    <div class="bg-gray-100 dark:bg-gray-800 rounded-3xl overflow-hidden p-4 animate-pulse">
-        <div class="h-48 bg-gray-200 dark:bg-gray-700 rounded-2xl mb-4"></div>
-        <div class="h-6 bg-gray-200 dark:bg-gray-700 rounded-full w-3/4 mb-2"></div>
-        <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded-full w-1/2"></div>
-    </div>
-</div>
-
-<div id="realFeed" class="hidden space-y-6">
-    </div>
-            <h2 class="text-lg font-bold dark:text-white">Fresh for you</h2>
-            
-            <div class="bg-gray-50 dark:bg-gray-800/50 rounded-3xl overflow-hidden border dark:border-gray-800 transition-all hover:scale-[1.02]">
-<div class="relative group">
-    <div class="flex overflow-x-auto snap-x snap-mandatory no-scrollbar h-60 w-full bg-gray-200 dark:bg-gray-800">
-        
-        <div class="flex-shrink-0 w-full snap-center">
-            <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?w=500" class="w-full h-full object-cover">
-        </div>
-
-        <div class="flex-shrink-0 w-full snap-center">
-            <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500" class="w-full h-full object-cover">
-        </div>
-
-        <div class="flex-shrink-0 w-full snap-center">
-            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500" class="w-full h-full object-cover">
-        </div>
-
-    </div>
-
-    <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex space-x-1.5 px-2 py-1 bg-black/20 backdrop-blur-md rounded-full">
-        <div class="w-1.5 h-1.5 rounded-full bg-white"></div>
-        <div class="w-1.5 h-1.5 rounded-full bg-white/40"></div>
-        <div class="w-1.5 h-1.5 rounded-full bg-white/40"></div>
-        
-    </div>
-</div>        
-                <button class="wishlist-btn absolute top-3 right-3 w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/30 z-10 transition-all active:scale-90">
-    <i class="far fa-heart text-lg"></i>
-</button>
-                <div class="p-4">
-                    <div class="flex justify-between items-start mb-2">
-                        <h3 class="font-bold text-gray-800 dark:text-white text-lg">Web Development Setup</h3>
-                        <span class="text-blue-600 font-extrabold">GH₵ 400</span>
-                    </div>
-                    <p class="text-gray-500 dark:text-gray-400 text-sm mb-4">Complete HTML/CSS/JS installation and local server setup.</p>
-    <a href="https://wa.me/233539547368?text=Hello%20Obasty,%20I%20am%20interested%20in%20the%20Product%20Name" 
-   target="_blank"
-   class="w-full flex items-center justify-center space-x-2 bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl font-bold text-sm transition-transform active:scale-95 shadow-lg shadow-green-500/20">
-    <i class="fab fa-whatsapp text-xl"></i>
-    <span>Chat on WhatsApp</span>
-</a>               
-    <button class="w-full bg-gray-900 dark:bg-white dark:text-gray-900 text-white py-3 rounded-xl font-bold text-sm">View Details</button>
-                    
-                </div>
+                <div class="bg-gray-100 dark:bg-gray-800 rounded-3xl h-64 animate-pulse"></div>
             </div>
 
-            <div class="bg-gray-50 dark:bg-gray-800/50 rounded-3xl overflow-hidden border dark:border-gray-800 transition-all hover:scale-[1.02]">
-<div class="relative group">
-    <div class="flex overflow-x-auto snap-x snap-mandatory no-scrollbar h-60 w-full bg-gray-200 dark:bg-gray-800">
-        
-        <div class="flex-shrink-0 w-full snap-center">
-            <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?w=500" class="w-full h-full object-cover">
-        </div>
-
-        <div class="flex-shrink-0 w-full snap-center">
-            <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500" class="w-full h-full object-cover">
-        </div>
-
-        <div class="flex-shrink-0 w-full snap-center">
-            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500" class="w-full h-full object-cover">
-        </div>
-
-    </div>
-
-    <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex space-x-1.5 px-2 py-1 bg-black/20 backdrop-blur-md rounded-full">
-        <div class="w-1.5 h-1.5 rounded-full bg-white"></div>
-        <div class="w-1.5 h-1.5 rounded-full bg-white/40"></div>
-        <div class="w-1.5 h-1.5 rounded-full bg-white/40"></div>
-        
-    </div>
-</div>       
-                <button class="wishlist-btn absolute top-3 right-3 w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/30 z-10 transition-all active:scale-90">
-    <i class="far fa-heart text-lg"></i>
-</button>
-                <div class="p-4">
-                    <div class="flex justify-between items-start mb-2">
-                        <h3 class="font-bold text-gray-800 dark:text-white text-lg">Professional Logo</h3>
-                        <span class="text-blue-600 font-extrabold">GH₵ 120</span>
+            <div id="realFeed" class="hidden space-y-6">
+                <h2 class="text-lg font-bold dark:text-white">Fresh for you</h2>
+                
+                <div class="bg-gray-50 dark:bg-gray-800/50 rounded-3xl overflow-hidden border dark:border-gray-800">
+                    <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?w=500" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-bold text-gray-800 dark:text-white">Web Setup</h3>
+                            <span class="text-blue-600 font-extrabold">GH₵ 400</span>
+                        </div>
+                        <p class="text-gray-500 dark:text-gray-400 text-xs mb-4">Complete HTML/CSS/JS installation.</p>
+                        <div class="flex gap-2">
+                            <a href="https://wa.me/233539547368" class="flex-1 bg-green-500 text-white py-3 rounded-xl font-bold text-center text-sm"><i class="fab fa-whatsapp mr-1"></i> Chat</a>
+                            <button onclick="openDetails('Web Setup', 'Full developer environment setup including VS Code and local servers.')" class="flex-1 bg-gray-900 dark:bg-white dark:text-black py-3 rounded-xl font-bold text-sm">Details</button>
+                        </div>
                     </div>
-                    <p class="text-gray-500 dark:text-gray-400 text-sm mb-4">High-quality minimalist designs for your startup.</p>
-                   <a href="https://wa.me/233539547368?text=Hello%20Obasty,%20I%20am%20interested%20in%20the%20Product%20Name" 
-   target="_blank"
-   class="w-full flex items-center justify-center space-x-2 bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl font-bold text-sm transition-transform active:scale-95 shadow-lg shadow-green-500/20">
-    <i class="fab fa-whatsapp text-xl"></i>
-    <span>Chat on WhatsApp</span>
-</a>
-                    <button class="w-full bg-gray-900 dark:bg-white dark:text-gray-900 text-white py-3 rounded-xl font-bold text-sm">View Details</button>
                 </div>
             </div>
         </main>
 
-        <nav class="fixed bottom-0 w-full max-w-[450px] bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg border-t dark:border-gray-800 px-6 py-4 flex justify-between items-center shadow-inner">
+        <nav class="fixed bottom-0 w-full max-w-[450px] bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg border-t dark:border-gray-800 px-6 py-4 flex justify-between items-center">
             <a href="#" class="text-blue-600"><i class="fas fa-home text-xl"></i></a>
             <a href="#" class="text-gray-400"><i class="fas fa-search text-xl"></i></a>
-            <div class="w-14 h-14 bg-blue-600 rounded-full flex items-center justify-center text-white shadow-xl shadow-blue-500/40 -mt-12 border-4 border-white dark:border-gray-900">
+            <div class="w-14 h-14 bg-blue-600 rounded-full flex items-center justify-center text-white shadow-xl -mt-12 border-4 border-white dark:border-gray-900">
                 <i class="fas fa-plus text-xl"></i>
             </div>
             <a href="#" class="text-gray-400"><i class="fas fa-comment-dots text-xl"></i></a>
             <a href="#" class="text-gray-400"><i class="fas fa-user text-xl"></i></a>
         </nav>
+    </div>
 
+    <div id="sheetOverlay" class="fixed inset-0 bg-black/50 z-[100] hidden opacity-0 transition-opacity duration-300"></div>
+    <div id="bottomSheet" class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[450px] bg-white dark:bg-gray-900 rounded-t-[32px] z-[101] transform translate-y-full transition-transform duration-500 border-t dark:border-gray-800 p-6">
+        <div class="w-12 h-1 bg-gray-300 mx-auto mb-6 rounded-full"></div>
+        <h2 id="sheetTitle" class="text-2xl font-black dark:text-white mb-2">Product</h2>
+        <p id="sheetDescription" class="text-gray-600 dark:text-gray-400 mb-6">Details go here.</p>
+        <button onclick="closeSheet()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold">Close</button>
     </div>
 
     <script>
+        // 1. DARK MODE
         const darkToggle = document.getElementById('darkToggle');
-        const html = document.documentElement;
-
         darkToggle.addEventListener('click', () => {
-            html.classList.toggle('dark');
+            document.documentElement.classList.toggle('dark');
             const icon = darkToggle.querySelector('i');
-            
-            if (html.classList.contains('dark')) {
-                icon.classList.replace('fa-moon', 'fa-sun');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                icon.classList.replace('fa-sun', 'fa-moon');
-                localStorage.setItem('theme', 'light');
-            }
+            icon.classList.toggle('fa-moon');
+            icon.classList.toggle('fa-sun');
         });
 
-        // Keep theme after refresh
-        if (localStorage.getItem('theme') === 'dark') {
-            html.classList.add('dark');
-            darkToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
+        // 2. BUDGET SLIDER
+        const range = document.getElementById('priceRange');
+        const valueDisplay = document.getElementById('priceValue');
+        range.addEventListener('input', (e) => {
+            valueDisplay.innerText = e.target.value;
+        });
+
+        // 3. SKELETON LOADER SIMULATION
+        setTimeout(() => {
+            document.getElementById('skeletonFeed').classList.add('hidden');
+            document.getElementById('realFeed').classList.remove('hidden');
+        }, 2000);
+
+        // 4. BOTTOM SHEET LOGIC
+        const sheet = document.getElementById('bottomSheet');
+        const overlay = document.getElementById('sheetOverlay');
+
+        function openDetails(title, desc) {
+            document.getElementById('sheetTitle').innerText = title;
+            document.getElementById('sheetDescription').innerText = desc;
+            sheet.classList.add('sheet-active');
+            overlay.classList.add('overlay-active');
         }
-    </script>
-    <div id="sheetOverlay" class="fixed inset-0 bg-black/50 z-[100] hidden opacity-0 transition-opacity duration-300"></div>
 
-<div id="bottomSheet" class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[450px] bg-white dark:bg-gray-900 rounded-t-[32px] z-[101] transform translate-y-full transition-transform duration-500 ease-out border-t dark:border-gray-800">
-    
-    <div class="flex justify-center p-4">
-        <div class="w-12 h-1.5 bg-gray-300 dark:bg-gray-700 rounded-full"></div>
-    </div>
-
-    <div class="px-6 pb-10 max-h-[70vh] overflow-y-auto">
-        <div class="flex justify-between items-start mb-4">
-            <h2 id="sheetTitle" class="text-2xl font-black dark:text-white">Product Details</h2>
-            <button id="closeSheet" class="text-gray-400 text-xl"><i class="fas fa-times-circle"></i></button>
-        </div>
+        function closeSheet() {
+            sheet.classList.remove('sheet-active');
+            overlay.classList.remove('overlay-active');
+        }
         
-        <p id="sheetDescription" class="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
-            Detailed information about the service will appear here. This area is perfect for listing specifications, delivery times, and terms.
-        </p>
-
-        <div class="flex space-x-3">
-            <button class="flex-1 bg-blue-600 text-white py-4 rounded-2xl font-bold shadow-lg shadow-blue-500/30">Buy Now</button>
-            <button class="w-14 h-14 bg-gray-100 dark:bg-gray-800 dark:text-white rounded-2xl flex items-center justify-center">
-                <i class="far fa-comment-dots text-xl"></i>
-            </button>
-        </div>
-    </div>
-</div>
+        overlay.addEventListener('click', closeSheet);
+    </script>
 </body>
 </html>
