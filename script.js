@@ -164,3 +164,15 @@ document.querySelectorAll('#historyList li').forEach(item => {
         // Trigger your search function here!
     });
 });
+window.addEventListener('DOMContentLoaded', () => {
+    const skeleton = document.getElementById('skeletonFeed');
+    const realContent = document.getElementById('realFeed');
+
+    // Wait 2 seconds, then swap the skeleton for the real products
+    setTimeout(() => {
+        skeleton.classList.add('hidden');
+        realContent.classList.remove('hidden');
+        // Optional: Add a fade-in animation
+        realContent.classList.add('animate-in', 'fade-in', 'duration-500');
+    }, 2000);
+});
