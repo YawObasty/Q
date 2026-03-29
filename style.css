@@ -1,4 +1,17 @@
-/* Custom styling for the range slider thumb */
+/* 1. RESET & UTILITIES */
+* { 
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s; 
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Prevent scrolling when splash is active */
+body.splash-active {
+    overflow: hidden !important;
+}
+
+/* 2. RANGE SLIDER CUSTOMIZATION (Chrome, Safari, Edge, Firefox) */
 input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
     height: 20px;
@@ -7,17 +20,20 @@ input[type=range]::-webkit-slider-thumb {
     background: #2563eb; /* blue-600 */
     box-shadow: 0 0 10px rgba(37, 99, 235, 0.4);
     cursor: pointer;
-}
-/* Ensure the gallery container doesn't show a scrollbar */
-.no-scrollbar::-webkit-scrollbar {
-    display: none;
-}
-/* Ensure the splash screen covers everything and the content doesn't scroll */
-body.splash-active {
-    overflow: hidden !important;
+    margin-top: -6px; /* Centers thumb on the track */
 }
 
-/* The 'Buzz' Animation */
+/* Firefox Support for Slider */
+input[type=range]::-moz-range-thumb {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #2563eb;
+    border: none;
+    cursor: pointer;
+}
+
+/* 3. ANIMATIONS */
 @keyframes photo-vibrate {
     0% { transform: translate(0, 0) rotate(0deg); }
     20% { transform: translate(-2px, 1px) rotate(-1deg); }
@@ -27,31 +43,27 @@ body.splash-active {
     100% { transform: translate(0, 0) rotate(0deg); }
 }
 
-/* Apply this class to make the photo shake */
 .vibrate-active {
     animation: photo-vibrate 0.1s linear infinite;
-    filter: brightness(1.1); /* Makes the photo "glow" while vibrating */
-}
-/* The 'Skip' button must stay on top of the splash content */
-#skipBtn {
-    z-index: 1001 !important;
-    pointer-events: auto !important; /* Forces the button to be clickable */
+    filter: brightness(1.1);
 }
 
-.splash-hide {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important; 
-    transition: all 0.8s ease-in-out;
-}
+/* 4. SPLASH SCREEN LAYERING */
 #btnEnter {
     position: relative;
-    z-index: 9999 !important; /* Forces it to the absolute front */
+    z-index: 9999 !important;
     cursor: pointer !important;
 }
 
+#skipBtn {
+    z-index: 1001 !important;
+    pointer-events: auto !important;
+}
+
+/* Merged the two .splash-hide classes into one clean rule */
 .splash-hide {
     opacity: 0 !important;
-    pointer-events: none !important; /* Crucial: makes the screen 'clickable-through' */
+    visibility: hidden !important;
+    pointer-events: none !important;
     transition: all 0.8s ease-in-out;
 }
