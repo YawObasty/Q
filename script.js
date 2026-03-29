@@ -187,29 +187,26 @@ function handleSplashScreen() {
     }
 }
 
-window.addEventListener('load', handleSplashScreen);
-function exitSplash() {
-    const splash = document.getElementById('splashScreen');
-    const enterSfx = document.getElementById('enterSfx');
-
-    // Play sound if you have it
-    if(enterSfx) {
-        enterSfx.currentTime = 0;
-        enterSfx.play().catch(() => {});
-    }
-
-    // Start the exit animation
-    splash.classList.add('splash-hide');
+// This function waits for the WHOLE page to be ready
+window.addEventListener('load', function() {
     
-    // Completely remove after animation
-    setTimeout(() => {
-        splash.style.display = 'none';
-        document.body.classList.remove('splash-active');
-    }, 800);
-}
+    const btnEnter = document.getElementById('btnEnter');
+    const splash = document.getElementById('splashScreen');
 
-// Attach to both buttons
-document.getElementById('skipBtn').addEventListener('click', exitSplash);
-document.getElementById('btnEnter').addEventListener('click', exitSplash);
-
-// Keep your existing handleSplashScreen to show the Enter button after 1.5s
+    if (btnEnter) {
+        btnEnter.addEventListener('click', function() {
+            console.log("Button clicked! Closing splash..."); // Check F12 console for this
+            
+            // 1. Add the hide class
+            splash.classList.add('splash-hide');
+            
+            // 2. Physically remove it after the animation
+            setTimeout(() => {
+                splash.style.display = 'none';
+                document.body.classList.remove('splash-active');
+            }, 800);
+        });
+    } else {
+        console.error("ICT ERROR: Could not find a button with id='btnEnter'");
+    }
+});
