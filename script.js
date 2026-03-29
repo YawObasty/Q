@@ -40,3 +40,24 @@ catButtons.forEach(btn => {
         activeBox.classList.remove('bg-gray-100', 'dark:bg-gray-800');
     });
 });
+let cartCount = 0;
+const cartBadge = document.getElementById('cartBadge');
+
+// Select all "Order" or "Action" buttons
+const actionButtons = document.querySelectorAll('.action-btn, button:contains("Order Now")');
+
+actionButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        cartCount++;
+        
+        // Show the badge if it was hidden
+        cartBadge.classList.remove('hidden');
+        cartBadge.innerText = cartCount;
+
+        // "Pop" animation to show something happened
+        cartBadge.classList.add('scale-125');
+        setTimeout(() => cartBadge.classList.remove('scale-125'), 200);
+        
+        alert("Item added to your selection!");
+    });
+});
