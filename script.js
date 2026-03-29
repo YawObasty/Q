@@ -103,3 +103,38 @@ wishlistBtns.forEach(btn => {
         }
     });
 });
+const sheet = document.getElementById('bottomSheet');
+const overlay = document.getElementById('sheetOverlay');
+const closeBtn = document.getElementById('closeSheet');
+
+// Function to Open
+function openSheet(title, desc) {
+    document.getElementById('sheetTitle').innerText = title;
+    document.getElementById('sheetDescription').innerText = desc;
+    
+    overlay.classList.remove('hidden');
+    setTimeout(() => {
+        overlay.classList.add('opacity-100');
+        sheet.classList.remove('translate-y-full');
+    }, 10);
+}
+
+// Function to Close
+function hideSheet() {
+    sheet.classList.add('translate-y-full');
+    overlay.classList.remove('opacity-100');
+    setTimeout(() => overlay.classList.add('hidden'), 500);
+}
+
+// Event Listeners
+closeBtn.addEventListener('click', hideSheet);
+overlay.addEventListener('click', hideSheet);
+
+// Attach to your "View Details" buttons
+document.querySelectorAll('.action-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const title = btn.closest('.bg-gray-50').querySelector('h3').innerText;
+        const desc = "This is a premium service provided by Obasty. Fast delivery within 24 hours in Winneba and Accra regions.";
+        openSheet(title, desc);
+    });
+});
