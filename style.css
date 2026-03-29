@@ -32,11 +32,15 @@ body.splash-active {
     animation: photo-vibrate 0.1s linear infinite;
     filter: brightness(1.1); /* Makes the photo "glow" while vibrating */
 }
-/* The 'Disappear' Magic */
+/* The 'Skip' button must stay on top of the splash content */
+#skipBtn {
+    z-index: 1001 !important;
+    pointer-events: auto !important; /* Forces the button to be clickable */
+}
+
 .splash-hide {
     opacity: 0 !important;
     visibility: hidden !important;
-    pointer-events: none !important; /* This lets you click the buttons behind it */
+    pointer-events: none !important; 
     transition: all 0.8s ease-in-out;
-    transform: scale(1.2); /* Slight zoom out as it fades */
 }
